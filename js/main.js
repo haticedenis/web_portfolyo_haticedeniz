@@ -47,3 +47,47 @@ window.addEventListener('scroll', function() {
         nav.style.background = 'rgba(15, 10, 26, 0.8)';
     }
 });
+
+
+// Form submission handling
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const messageDiv = document.getElementById('form-message');
+        
+        // Show loading message
+        messageDiv.textContent = 'Mesajınız gönderiliyor...';
+        messageDiv.className = 'form-message loading';
+        
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                messageDiv.textContent = '✅ Mesajınız başarıyla gönderildi! Teşekkürler.';
+                messageDiv.className = 'form-message success';
+                contactForm.reset();
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.textContent = '';
+                    messageDiv.className = 'form-message';
+                }, 5000);
+            } else {
+                throw new Error('Form gönderilemedi');
+            }
+        })
+        .catch(error => {
+            messageDiv.textContent = '❌ Bir hata oluştu. Lütfen daha sonra tekrar deneyin.';
+            messageDiv.className = 'form-message error';
+            console.error('Error:', error);
+        });
+    });
+}
