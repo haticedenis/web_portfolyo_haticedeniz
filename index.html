@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">portfölyö</div>
+        <div class="logo">haticedeniz</div>
         <ul class="nav-links">
             <li><a onclick="scrollToSection('about')">Hakkımda</a></li>
             <li><a onclick="scrollToSection('skills')">Beceriler</a></li>
@@ -82,6 +82,39 @@
                 <p>Uzaktan eğitime uygun, sade ve kullanıcı odaklı</p>
             </div>
         </div>
+    </section>
+
+
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Bize Mesaj Gönderin </h2>
+        <div class="contact-content">
+            <p>Benimle iletişime geçmek,mesaj göndermek için aşağıdaki sayfayı doldurabilirsiniz🥳</p>
+            <form class="contact-form" action="https://formspree.io/f/xbdpkbwg" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Adınız" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="E-posta Adresiniz" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="subject" placeholder="Konu" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Gönder</button>
+            </form>
+            
+        </div>
+    </section>
+
+   
+
+    <script src="script.js"></script>
+</body>
+</html>
     </section>
     <section id="contact">
         <h2 class="section-title">İletişim</h2>
