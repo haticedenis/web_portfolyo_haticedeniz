@@ -1,4 +1,26 @@
-# web-portfolio-template
-web projesi dersinde kullanacağınız şablonu oluşturuyorum
-#burası HATİCE DENİZ tarafından oluşturuldu
-burası benim readme sayfam
+##  Amaç
+
+Bu portföyün amacı, dijital içerik üretimi ve tasarım alanında gerçekleştirdiğim çalışmaları sergilemek ve yaratıcı becerilerimi ortaya koymaktır.  
+Farklı tasarım yaklaşımlarımı, estetik anlayışımı ve üretim sürecimi yansıtan projeleri bir araya getirerek profesyonel bir referans sunmayı hedefliyorum.
+
+
+
+## ⚙️ Kullanım
+
+- Bu repoda yer alan tasarım çalışmalarını inceleyebilirsiniz.  
+- Görselleri detaylı incelemek için ilgili klasörlere göz atabilirsiniz.  
+- İçerikler ilham almak ve referans amaçlı kullanılabilir.  
+
+
+
+## İçerik
+
+Bu portföy aşağıdaki türde çalışmalar içermektedir:
+
+-  Sosyal medya post tasarımları  
+-  Dijital illüstrasyonlar  
+-  Afiş ve banner tasarımları  
+-  Marka ve konsept tasarım çalışmaları  
+-  Kişisel yaratıcı projeler  
+
+Her çalışma, tasarım süreci ve kullanılan araçlarla birlikte sunulmaktadır.
