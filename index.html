@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -6,132 +6,141 @@
     <title>Hatice Deniz - Portföy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
-        <div class="logo">haticedeniz</div>
-        <ul class="nav-links">
-            <li><a onclick="scrollToSection('about')">Hakkımda</a></li>
-            <li><a onclick="scrollToSection('skills')">Beceriler</a></li>
-            <li><a onclick="scrollToSection('contact')">İletişim</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">portföy</div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" data-page="home">Ana Sayfa</a></li>
+                <li><a href="#" data-page="about">Hakkımda</a></li>
+                <li><a href="#" data-page="skills">Beceriler</a></li>
+                <li><a href="#" data-page="contact">İletişim</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>portfölyö</h1>
-            <h2>HATİCE DENİZ</h2>
-            <p>Uzaktan eğitim alanında içerik üreticisi | Animasyon & Dijital Tasarım</p>
-            <button class="cta-button" onclick="scrollToSection('about')">
-                Keşfet
-                <span>↓</span>
-            </button>
-        </div>
-        <div class="scroll-indicator">↓</div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title">Hakkımda</h2>
-        <div class="about-card">
-            <div class="about-content">
-                <p>
-                    Merhaba, ben Hatice. Uzaktan eğitim alanında içerik üretiyorum. Ağırlıklı olarak LUMI kullanarak etkileşimli öğrenme materyalleri hazırlıyor, eğitim videolarımı Canva üzerinden tasarlıyorum.
-                </p>
-                <p>
-                    Animasyon ve dijital tasarım araçlarına ilgi duyuyor, bu alanda kendimi sürekli geliştiriyorum. Öğrenmeyi sade, anlaşılır ve görsel olarak destekleyen içerikler üretmeyi önemsiyorum.
-                </p>
-                <p>
-                    Teknoloji ve eğitimin kesişim noktasında yenilikçi çözümler sunmak benim tutkum. Her projede, kullanıcı deneyimini ve içerik kalitesini ön planda tutuyorum.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2 class="section-title">Beceriler</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">🎓</div>
-                <h3>Articulate Lumi</h3>
-                <p>Etkileşimli e-öğrenme içerikleri hazırlama</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">🎨</div>
-                <h3>Canva</h3>
-                <p>Animasyonlu video ve sunum tasarımı</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">✨</div>
-                <h3>Adobe Animate</h3>
-                <p>Temel 2D animasyon oluşturma</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">🖼️</div>
-                <h3>Adobe Photoshop</h3>
-                <p>Görsel düzenleme ve dijital tasarım</p>
-            </div>
-            <div class="skill-card">
-                <div class="skill-icon">📝</div>
-                <h3>İçerik Üretimi</h3>
-                <p>Uzaktan eğitime uygun, sade ve kullanıcı odaklı</p>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2 class="section-title">Bize Mesaj Gönderin </h2>
-        <div class="contact-content">
-            <p>Benimle iletişime geçmek,mesaj göndermek için aşağıdaki sayfayı doldurabilirsiniz🥳</p>
-            <form class="contact-form" action="https://formspree.io/f/xbdpkbwg" method="POST">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Adınız" required>
+    <!-- Main Container -->
+    <div class="pages-container">
+        <!-- Home Page -->
+        <div class="page" id="home-page" data-page="home">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">portfölyö</h1>
+                    <h2 class="hero-subtitle">HATİCE DENİZ</h2>
+                    <p class="hero-description">Uzaktan eğitim alanında içerik üreticisi | Animasyon & Dijital Tasarım</p>
+                    <button class="cta-button" onclick="goToPage('about')">Keşfet</button>
                 </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="E-posta Adresiniz" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="subject" placeholder="Konu" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Gönder</button>
-            </form>
-            
+            </section>
         </div>
-    </section>
 
-   
-
-    <script src="script.js"></script>
-</body>
-</html>
-    </section>
-    <section id="contact">
-        <h2 class="section-title">İletişim</h2>
-        <div class="contact-content">
-            <p>Benimle iletişime geçmek ve projelerimi görmek için aşağıdaki kanalları kullanabilirsiniz.</p>
-            <div class="contact-buttons">
-                <a href="https://drive.google.com/drive/folders/1G0lfyLcWfwm4imHaw74UJR8GHwYlo5I4?usp=sharing" target="_blank" class="contact-btn">
-                    Drive
-                </a>
-                
-                <a href="https://instagram.com/haticedenisss" target="_blank" class="contact-btn">
-                     Instagram
-                </a>
-            </div>
-            
+        <!-- About Page -->
+        <div class="page" id="about-page" data-page="about">
+            <section class="about-section">
+                <div class="page-header">
+                    <h2 class="page-title">Hakkımda</h2>
+                </div>
+                <div class="about-card">
+                    <div class="about-content">
+                        <p>
+                            Merhaba, ben Hatice. Uzaktan eğitim alanında içerik üretiyorum. Ağırlıklı olarak LUMI kullanarak etkileşimli öğrenme materyalleri hazırlıyor, eğitim videolarımı Canva üzerinden tasarlıyorum.
+                        </p>
+                        <p>
+                            Animasyon ve dijital tasarım araçlarına ilgi duyuyor, bu alanda kendimi sürekli geliştiriyorum. Öğrenmeyi sade, anlaşılır ve görsel olarak destekleyen içerikler üretmeyi önemsiyorum.
+                        </p>
+                        <p>
+                            Teknoloji ve eğitimin kesişim noktasında yenilikçi çözümler sunmak benim tutkum. Her projede, kullanıcı deneyimini ve içerik kalitesini ön planda tutuyorum.
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
+
+        <!-- Skills Page -->
+        <div class="page" id="skills-page" data-page="skills">
+            <section class="skills-section">
+                <div class="page-header">
+                    <h2 class="page-title">Beceriler</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon">🎓</div>
+                        <h3>Articulate Lumi</h3>
+                        <p>Etkileşimli e-öğrenme içerikleri hazırlama</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🎨</div>
+                        <h3>Canva</h3>
+                        <p>Animasyonlu video ve sunum tasarımı</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">✨</div>
+                        <h3>Adobe Animate</h3>
+                        <p>Temel 2D animasyon oluşturma</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🖼️</div>
+                        <h3>Adobe Photoshop</h3>
+                        <p>Görsel düzenleme ve dijital tasarım</p>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">📝</div>
+                        <h3>İçerik Üretimi</h3>
+                        <p>Uzaktan eğitime uygun, sade ve kullanıcı odaklı</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div class="page" id="contact-page" data-page="contact">
+            <section class="contact-section">
+                <div class="page-header">
+                    <h2 class="page-title">İletişim</h2>
+                </div>
+                <div class="contact-content">
+                    <p>Benimle iletişime geçmek ve projelerimi görmek için aşağıdaki kanalları kullanabilirsiniz.</p>
+                    
+                    <div id="form-message" class="form-message"></div>
+                    <form id="contactForm" class="contact-form" action="https://formspree.io/f/xyzgvzpq" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Adınız" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="E-posta Adresiniz" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Konu" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Mesajınız" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Gönder</button>
+                    </form>
+                    
+                    <div class="social-icons">
+                        <a href="mailto:haticedeniz4066@gmail.com" class="social-icon" title="Email">
+                            ✉️
+                        </a>
+                        <a href="https://instagram.com/haticedenisss" target="_blank" class="social-icon" title="Instagram">
+                            📷
+                        </a>
+                        <a href="#" class="social-icon" title="LinkedIn">
+                            💼
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
