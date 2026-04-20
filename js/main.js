@@ -99,4 +99,4 @@ const observer = new IntersectionObserver(function(entries) {
 // Observe skill cards
 document.querySelectorAll('.skill-card').forEach(card => {
     observer.observe(card);
-});
+})
