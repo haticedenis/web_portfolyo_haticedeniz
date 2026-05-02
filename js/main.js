@@ -406,6 +406,164 @@ document.querySelectorAll('a, button, input, textarea').forEach(element => {
 });
 
 // ============================================
+// SERVICES - JSON DATA LOADING & LOCALSTORAGE
+// ============================================
+
+let allServices = [];
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Hizmet verileri (gömülü)
+const servicesData = {
+  "services": [
+    {
+      "id": 1,
+      "name": "Eğitim Videosu 1",
+      "description": "LUMI ve Canva kullanarak hazırladığım etkileşimli eğitim videosu",
+      "price": 1500,
+      "category": "Design",
+      "icon": "fa-video",
+      "features": ["LUMI", "Canva", "Animasyon"]
+    },
+    {
+      "id": 2,
+      "name": "Eğitim Videosu 2",
+      "description": "Profesyonel tasarımla oluşturulmuş eğitim içeriği",
+      "price": 1500,
+      "category": "Design",
+      "icon": "fa-video",
+      "features": ["LUMI", "Canva", "Animasyon"]
+    },
+    {
+      "id": 3,
+      "name": "Eğitim Videosu 3",
+      "description": "Dijital tasarım ve animasyon ile zenginleştirilmiş video",
+      "price": 1500,
+      "category": "Design",
+      "icon": "fa-video",
+      "features": ["LUMI", "Canva", "Animasyon"]
+    }
+  ]
+};
+
+// Hizmetleri yükle
+function loadServices() {
+    try {
+        allServices = servicesData.services;
+        renderServices(allServices);
+        setupFilterButtons();
+    } catch (error) {
+        console.error('Hizmetler yüklenirken hata oluştu:', error);
+    }
+}
+
+// Hizmetleri ekrana render et
+function renderServices(services) {
+    const servicesGrid = document.getElementById('servicesGrid');
+    servicesGrid.innerHTML = '';
+    
+    services.forEach(service => {
+        const isFavorite = favorites.some(fav => fav.id === service.id);
+        const isInCart = cart.some(item => item.id === service.id);
+        
+        const serviceCard = document.createElement('div');
+        serviceCard.className = 'service-card';
+        serviceCard.innerHTML = `
+            <div class="service-icon">
+                <i class="fas ${service.icon}"></i>
+            </div>
+            <h3>${service.name}</h3>
+            <p>${service.description}</p>
+            <div class="service-features">
+                ${service.features.map(feature => `<span>${feature}</span>`).join('')}
+            </div>
+            <div class="service-price">₺${service.price.toLocaleString('tr-TR')}</div>
+            <div class="service-actions">
+                <button class="service-btn add-favorite ${isFavorite ? 'active' : ''}" data-id="${service.id}">
+                    <i class="fas fa-heart"></i>
+                    <span>${isFavorite ? 'Favorilerde' : 'Favorilere'}</span>
+                </button>
+                <button class="service-btn add-cart ${isInCart ? 'active' : ''}" data-id="${service.id}">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>${isInCart ? 'Sepette' : 'Sepete Ekle'}</span>
+                </button>
+            </div>
+        `;
+        
+        servicesGrid.appendChild(serviceCard);
+    });
+    
+    // Event listeners ekle
+    attachServiceEventListeners();
+}
+
+// Filter butonlarını ayarla
+function setupFilterButtons() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const filter = btn.dataset.filter;
+            if (filter === 'all') {
+                renderServices(allServices);
+            } else {
+                const filtered = allServices.filter(service => service.category === filter);
+                renderServices(filtered);
+            }
+        });
+    });
+}
+
+// Hizmet butonlarına event listener ekle
+function attachServiceEventListeners() {
+    // Favorilere ekle
+    document.querySelectorAll('.add-favorite').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceId = parseInt(this.dataset.id);
+            const service = allServices.find(s => s.id === serviceId);
+            
+            if (favorites.some(fav => fav.id === serviceId)) {
+                favorites = favorites.filter(fav => fav.id !== serviceId);
+                showNotification('Favorilerden kaldırıldı', 'info');
+            } else {
+                favorites.push(service);
+                showNotification('Favorilere eklendi!', 'success');
+            }
+            
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            this.classList.toggle('active');
+            this.innerHTML = this.classList.contains('active') 
+                ? '<i class="fas fa-heart"></i><span>Favorilerde</span>' 
+                : '<i class="fas fa-heart"></i><span>Favorilere</span>';
+        });
+    });
+    
+    // Sepete ekle
+    document.querySelectorAll('.add-cart').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceId = parseInt(this.dataset.id);
+            const service = allServices.find(s => s.id === serviceId);
+            
+            if (cart.some(item => item.id === serviceId)) {
+                cart = cart.filter(item => item.id !== serviceId);
+                showNotification('Sepetten kaldırıldı', 'info');
+            } else {
+                cart.push(service);
+                showNotification('Sepete eklendi!', 'success');
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            this.classList.toggle('active');
+            this.innerHTML = this.classList.contains('active') 
+                ? '<i class="fas fa-shopping-cart"></i><span>Sepette</span>' 
+                : '<i class="fas fa-shopping-cart"></i><span>Sepete Ekle</span>';
+        });
+    });
+}
+
+// ============================================
 // INITIALIZATION
 // ============================================
 
@@ -426,6 +584,9 @@ window.addEventListener('load', () => {
         body.classList.add('dark-mode');
         updateThemeIcon();
     }
+    
+    // Hizmetleri yükle
+    loadServices();
 });
 
 // Prevent default behavior for placeholder links
@@ -433,4 +594,175 @@ document.querySelectorAll('a[href="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
     });
+});
+
+
+// ============================================
+// FAVORITES & CART PAGE MANAGEMENT
+// ============================================
+
+const favoritesBtn = document.getElementById('favoritesBtn');
+const cartBtn = document.getElementById('cartBtn');
+const favoritesBadge = document.getElementById('favoritesBadge');
+const cartBadge = document.getElementById('cartBadge');
+
+// Sayfalar
+const homeSection = document.getElementById('home');
+const aboutSection = document.getElementById('about');
+const servicesSection = document.getElementById('services');
+const projectsSection = document.getElementById('projects');
+const contactSection = document.getElementById('contact');
+const favoritesSection = document.getElementById('favorites');
+const cartSection = document.getElementById('cart');
+
+// Tüm sayfaları gizle
+function hideAllSections() {
+    homeSection.style.display = 'none';
+    aboutSection.style.display = 'none';
+    servicesSection.style.display = 'none';
+    projectsSection.style.display = 'none';
+    contactSection.style.display = 'none';
+    favoritesSection.style.display = 'none';
+    cartSection.style.display = 'none';
+}
+
+// Badge'leri güncelle
+function updateBadges() {
+    favoritesBadge.textContent = favorites.length;
+    cartBadge.textContent = cart.length;
+}
+
+// Favoriler sayfasını göster
+favoritesBtn.addEventListener('click', () => {
+    hideAllSections();
+    favoritesSection.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    renderFavoritesPage();
+});
+
+// Sepet sayfasını göster
+cartBtn.addEventListener('click', () => {
+    hideAllSections();
+    cartSection.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    renderCartPage();
+});
+
+// Favoriler sayfasını render et
+function renderFavoritesPage() {
+    const favoritesList = document.getElementById('favoritesList');
+    
+    if (favorites.length === 0) {
+        favoritesList.innerHTML = `
+            <div class="empty-message">
+                <i class="fas fa-heart"></i>
+                <p>Henüz favori eklemediniz</p>
+                <a href="#" onclick="showHome()">Hizmetlere Dön</a>
+            </div>
+        `;
+        return;
+    }
+    
+    favoritesList.innerHTML = '';
+    favorites.forEach(item => {
+        const itemCard = document.createElement('div');
+        itemCard.className = 'item-card';
+        itemCard.innerHTML = `
+            <div class="item-icon">
+                <i class="fas ${item.icon}"></i>
+            </div>
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <div class="item-features">
+                ${item.features.map(feature => `<span>${feature}</span>`).join('')}
+            </div>
+            <div class="item-price">₺${item.price.toLocaleString('tr-TR')}</div>
+            <div class="item-actions">
+                <button class="item-btn remove" onclick="removeFavorite(${item.id})">
+                    <i class="fas fa-trash"></i> Kaldır
+                </button>
+            </div>
+        `;
+        favoritesList.appendChild(itemCard);
+    });
+}
+
+// Sepet sayfasını render et
+function renderCartPage() {
+    const cartList = document.getElementById('cartList');
+    const totalPrice = document.getElementById('totalPrice');
+    
+    if (cart.length === 0) {
+        cartList.innerHTML = `
+            <div class="empty-message">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Sepetiniz boş</p>
+                <a href="#" onclick="showHome()">Hizmetlere Dön</a>
+            </div>
+        `;
+        totalPrice.textContent = '₺0';
+        return;
+    }
+    
+    cartList.innerHTML = '';
+    let total = 0;
+    
+    cart.forEach(item => {
+        total += item.price;
+        const itemCard = document.createElement('div');
+        itemCard.className = 'item-card';
+        itemCard.innerHTML = `
+            <div class="item-icon">
+                <i class="fas ${item.icon}"></i>
+            </div>
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <div class="item-features">
+                ${item.features.map(feature => `<span>${feature}</span>`).join('')}
+            </div>
+            <div class="item-price">₺${item.price.toLocaleString('tr-TR')}</div>
+            <div class="item-actions">
+                <button class="item-btn remove" onclick="removeFromCart(${item.id})">
+                    <i class="fas fa-trash"></i> Kaldır
+                </button>
+            </div>
+        `;
+        cartList.appendChild(itemCard);
+    });
+    
+    totalPrice.textContent = '₺' + total.toLocaleString('tr-TR');
+}
+
+// Favorilerden kaldır
+function removeFavorite(id) {
+    favorites = favorites.filter(fav => fav.id !== id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    updateBadges();
+    renderFavoritesPage();
+    showNotification('Favorilerden kaldırıldı', 'info');
+}
+
+// Sepetten kaldır
+function removeFromCart(id) {
+    cart = cart.filter(item => item.id !== id);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateBadges();
+    renderCartPage();
+    showNotification('Sepetten kaldırıldı', 'info');
+}
+
+// Anasayfaya dön
+function showHome() {
+    hideAllSections();
+    homeSection.style.display = 'block';
+    aboutSection.style.display = 'block';
+    servicesSection.style.display = 'block';
+    projectsSection.style.display = 'block';
+    contactSection.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'auto' });
+}
+
+// Sayfa yüklenince badge'leri güncelle
+window.addEventListener('load', () => {
+    updateBadges();
 });
