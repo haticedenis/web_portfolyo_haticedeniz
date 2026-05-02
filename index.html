@@ -25,6 +25,7 @@
                 <nav class="nav-desktop">
                     <a href="#home">Anasayfa</a>
                     <a href="#about">Hakkımda</a>
+                    <a href="#services">Hizmetler</a>
                     <a href="#projects">Projeler</a>
                     <a href="#contact">İletişim</a>
                 </nav>
@@ -41,6 +42,18 @@
                     <i class="fas fa-moon"></i>
                 </button>
 
+                <!-- Favorites Button -->
+                <button class="header-btn favorites-btn" id="favoritesBtn" aria-label="Favoriler">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="favoritesBadge">0</span>
+                </button>
+
+                <!-- Cart Button -->
+                <button class="header-btn cart-btn" id="cartBtn" aria-label="Sepet">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="badge" id="cartBadge">0</span>
+                </button>
+
                 <!-- Desktop CTA -->
                
             </div>
@@ -49,6 +62,7 @@
             <nav class="nav-mobile" id="navMobile">
                 <a href="#home">Anasayfa</a>
                 <a href="#about">Hakkımda</a>
+                <a href="#services">Hizmetler</a>
                 <a href="#projects">Projeler</a>
                 <a href="#contact">İletişim</a>
                 <button class="cta-button">Bana Ulaş</button>
@@ -118,6 +132,29 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Hizmetlerim</h2>
+                <div class="header-line"></div>
+            </div>
+
+            <div class="services-filter">
+                <button class="filter-btn active" data-filter="all">Tümü</button>
+                <button class="filter-btn" data-filter="Design">Tasarım</button>
+                <button class="filter-btn" data-filter="Development">Geliştirme</button>
+                <button class="filter-btn" data-filter="Database">Veritabanı</button>
+                <button class="filter-btn" data-filter="Marketing">Pazarlama</button>
+                <button class="filter-btn" data-filter="Mobile">Mobil</button>
+            </div>
+
+            <div class="services-grid" id="servicesGrid">
+                <!-- Hizmetler JavaScript tarafından yüklenecek -->
             </div>
         </div>
     </section>
@@ -209,6 +246,39 @@
                         </video>
                     </div>
                   
+    </section>
+
+    <!-- Favorites Section -->
+    <section id="favorites" class="favorites" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Favorilerim</h2>
+                <div class="header-line"></div>
+            </div>
+            <div id="favoritesList" class="items-list">
+                <!-- Favoriler buraya gelecek -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart" class="cart" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sepetim</h2>
+                <div class="header-line"></div>
+            </div>
+            <div id="cartList" class="items-list">
+                <!-- Sepet ürünleri buraya gelecek -->
+            </div>
+            <div class="cart-summary">
+                <div class="summary-item">
+                    <span>Toplam Fiyat:</span>
+                    <span id="totalPrice">₺0</span>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Satın Al</button>
+            </div>
+        </div>
     </section>
 
     <!-- Contact Section -->
